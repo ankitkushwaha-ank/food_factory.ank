@@ -1,13 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="/static/css/admin.css" />
-  <link rel="icon" href="/static/img/Picturea1.png">
+
+  <!-- Static CSS & Favicon -->
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  <link rel="icon" href="{% static 'img/Picturea1.png' %}">
+
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons" defer></script>
+
   <style>
     .admin-section {
       display: none;
@@ -29,15 +35,13 @@
         <a href="#" id="enquiry-link"><i data-feather="calendar"></i><span>Enquiries</span></a>
         <a href="#" id="users-link"><i data-feather="users"></i><span>Users</span></a>
       </nav><br>
-        <a style="color: #fff; text-decoration:none; margin-left:27px;" href="{% url 'admin_logout' %}"><i data-feather="log-out"></i><span>Logout</span></a>
+      <a style="color: #fff; text-decoration:none; margin-left:27px;" href="{% url 'admin_logout' %}"><i data-feather="log-out"></i><span>Logout</span></a>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <h1>Dashboard</h1>
-        <div class="admin-profile">
-            👋 Hello, {{ user }}
-        </div>
+        <div class="admin-profile">👋 Hello, {{ user }}</div>
       </header>
 
       <!-- Dashboard -->
@@ -50,16 +54,14 @@
         </div>
       </section>
 
-       <!-- Home page -->
+      <!-- Home page -->
       <section id="home-section" class="admin-section">
         <div class="topbar">
           <h2>Home page</h2>
           <button id="add-news-btn" class="btn">Add News</button>
         </div>
-          <button
-                  id="enable-selector" class="btn" style="background-color:red;">Remove News</button>
+        <button id="enable-selector" class="btn" style="background-color:red;">Remove News</button>
 
-        <!-- Form Toggle -->
         <div id="add-news-form" style="display: none;">
           <form method="POST" action="{% url 'add-news' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -90,7 +92,6 @@
           <button id="add-food-btn" class="btn">Add Food</button>
         </div>
 
-        <!-- Form Toggle -->
         <div id="add-food-form" style="display: none;">
           <form method="POST" action="{% url 'add-food' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -126,7 +127,6 @@
         </div>
       </section>
 
-
       <!-- Orders -->
       <section id="orders-section" class="admin-section">
         <h2>Orders</h2>
@@ -150,7 +150,7 @@
         </table>
       </section>
 
-      <!-- Enquery -->
+      <!-- Enquiries -->
       <section id="enquiry-section" class="admin-section">
         <h2>Enquiry</h2>
         <table>
@@ -162,7 +162,9 @@
               <td>{{ enquiery.email }}</td>
               <td>{{ enquiery.message }}</td>
               <td>{{ enquiery.time }}</td>
-              <td><button type="submit" onclick="window.location.href='{% url 'del-enq' enquiery.id %}'" style="background-color: rgba(255, 255, 255, 0.1); font-size: 16px; padding: 10px 6px;  width: 100%; border-radius:04px; color: red; word-break: break-word;">Delete</button></td>
+              <td>
+                <button type="submit" onclick="window.location.href='{% url 'del-enq' enquiery.id %}'" style="background-color: rgba(255, 255, 255, 0.1); font-size: 16px; padding: 10px 6px; width: 100%; border-radius: 4px; color: red;">Delete</button>
+              </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -204,7 +206,7 @@
     </main>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JavaScript for Section Switching -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const sections = {
@@ -229,28 +231,20 @@
         });
       });
 
-      const addFoodBtn = document.getElementById('add-food-btn');
-      const addFoodForm = document.getElementById('add-food-form');
+      document.getElementById('add-food-btn')?.addEventListener('click', () => {
+        const form = document.getElementById('add-food-form');
+        form.style.display = form.style.display === 'block' ? 'none' : 'block';
+      });
 
-      if (addFoodBtn && addFoodForm) {
-        addFoodBtn.addEventListener('click', function () {
-          addFoodForm.style.display = addFoodForm.style.display === 'none' || addFoodForm.style.display === '' ? 'block' : 'none';
-        });
-      }
-
-      const addNewsBtn = document.getElementById('add-news-btn');
-      const addNewsForm = document.getElementById('add-news-form');
-      if (addNewsBtn && addNewsForm) {
-        addNewsBtn.addEventListener('click', function () {
-          addNewsForm.style.display = addNewsForm.style.display === 'none' || addNewsForm.style.display === '' ? 'block' : 'none';
-        });
-      }
+      document.getElementById('add-news-btn')?.addEventListener('click', () => {
+        const form = document.getElementById('add-news-form');
+        form.style.display = form.style.display === 'block' ? 'none' : 'block';
+      });
 
       feather.replace();
     });
 
     let selectionMode = false;
-
     document.getElementById("enable-selector").addEventListener("click", () => {
       selectionMode = true;
       alert("Selection mode activated. Click on a box.");
@@ -261,9 +255,8 @@
         if (selectionMode) {
           document.querySelectorAll(".selectable").forEach(d => d.classList.remove("selected"));
           this.classList.add("selected");
-          selectionMode = false; // disable mode after one selection
+          selectionMode = false;
           alert("Selected div ID: " + this.id);
-          // You can also use this.id in JS logic here
         }
       });
     });
