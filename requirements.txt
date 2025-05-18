@@ -1,0 +1,5 @@
+Django>=4.2,<5.0
+gunicorn>=20.1.0
+tinymce>=3.6.1
+auto-slug>=1.0.0
+social-auth-app-django>=5.4.0
