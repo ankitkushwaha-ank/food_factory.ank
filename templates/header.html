@@ -1,4 +1,3 @@
-{% load static %}
 <style>
 .admin-profile {
   position: absolute;
@@ -19,7 +18,7 @@
 
 </style>
 <header class="wrapper light">
-	<a href="/"><img class="logo" src="{% static '/static/img/logo.png' %}" alt="Restaurant Logo"/></a>
+	<a href="/"><img class="logo" src="/static/img/logo.png" alt="Restaurant Logo"/></a>
 	<nav>
 		<ul class="nav-links">
 			<li class="{% if request.path == '/' %} active {% endif %}" style="{% if request.path == '/' %} background-color: #FFD700 ; border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/">Home</a></li>
