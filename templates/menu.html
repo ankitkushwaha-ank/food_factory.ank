@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,12 @@
     <meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/fancybox.css">
-    <link rel="stylesheet" href="/static/css/animate.css">
-    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fancybox.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
 
-    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 <body>
 
@@ -42,19 +43,19 @@
         {% if service_data %}
             {% for n in service_data %}
             <li class="animated wow fadeInDown">
-                <img class="icon" src="/media/{{n.service_image}}" alt="Service Image"/>
+                <img class="icon" src="{% static 'media/' %}{{ n.service_image }}" alt="Service Image"/>
 
                 <br><br>
 
-                <h2>{{n.service_title}}</h2>
+                <h2>{{ n.service_title }}</h2>
                 <br>
-                <h4>{{n.service_price}} rupees</h4>
+                <h4>{{ n.service_price }} rupees</h4>
                 <br>
 
                 <div class="order">
                     <button
                         type="button"
-                        onclick="window.location.href='/menu_detail/{{n.menu_slug}}'"
+                        onclick="window.location.href='/menu_detail/{{ n.menu_slug }}'"
                         style="cursor:pointer; border: 1px solid #ccc; padding: 8px 26px; font-size: 20px;"
                     >
                         Order
@@ -64,7 +65,7 @@
                         name="addtocart"
                         style="cursor:pointer; border: 1px solid #ccc; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #FFDF00;"
                     >
-                        <img src="/static/img/dish.png" alt="cart image" height="16px">
+                        <img src="{% static 'img/dish.png' %}" alt="cart image" height="16px">
                     </button>
                 </div>
                 <br><br>
@@ -82,7 +83,7 @@
 
 <!-- Cart Icon -->
 <div class="cart-icon" id="cart-icon" onclick="toggleCart()">
-    <img src="/static/img/cart_img.png" alt="Cart" height="50px">
+    <img src="{% static 'img/cart_img.png' %}" alt="Cart" height="50px">
 </div>
 
 <!-- Slide-in Cart -->
@@ -93,7 +94,7 @@
     {% for n in cart %}
     <div class="cart-items">
         <div class="cart-item">
-            <img src="/media/{{ n.item_image }}" alt="{{ n.item_title }}" onclick="window.location.href='/menu_detail/{{n.item_slug}}'" style="cursor: pointer;">
+            <img src="{% static 'media/' %}{{ n.item_image }}" alt="{{ n.item_title }}" onclick="window.location.href='/menu_detail/{{ n.item_slug }}'" style="cursor: pointer;">
             <div class="item-info">
                 <span>{{ n.item_title }}
                     <span class="delete-btn" onclick="window.location.href='{% url 'remove-item' n.id %}'">Remove</span>
