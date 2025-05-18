@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>contact-us page</title>
+	<meta charset="utf-8">
+	<meta name="author" content="mr.h4cker.com">
+	<meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-thumbs.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-buttons.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/fancybox.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/contact.css">
+	<link rel="icon" type="image/png" href="/static/img/favicon.png">
+</head>
+<body>
+
+	<section class="billboard light">
+		<!-- Include Header -->
+		{% include "header.html" %}
+
+		<div class="caption light animated wow fadeInDown clearfix">
+			<h1>Come talk to us</h1>
+			<p>We always value your words.</p>
+			<hr>
+		</div>
+		<div class="shadow"></div>
+	</section><!-- End billboard -->
+
+	<section class="services wrapper">
+		<ul class="clearfix">
+			<li class="animated wow fadeInDown">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115133.01634116886!2d85.06064147534
+				241!3d25.608014355363856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f29937c52d4f05%3A0x831a0e05f607
+				b270!2sPatna%2C%20Bihar!5e0!3m2!1sen!2sin!4v1745473902137!5m2!1sen!2sin"
+						width="600" height="450" style="border:0;" allowfullscreen=""
+						loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+				</iframe>
+				<span class="separator"></span>
+			</li>
+			<li class="animated wow fadeInDown" data-wow-delay=".2s">
+				<img class="icon" src="/static/img/icon2.png" alt=""/>
+				<span class="separator"></span>
+				<h2>How to reach us:</h2>
+				<p>Phone No. xxxxxxxxxxx</p>
+				<p>Fax: xxxxxxxxxxxx</p>
+				<p>House No. xxx. Road. xxxx. Block. xxx. india.</p>
+			</li>
+		</ul>
+	</section><!-- End service -->
+
+	<!-- Contact Form -->
+	<section class="contact">
+		<div id="form-main">
+			<div id="form-div">
+				<form class="form" id="form1" method="POST">
+					{% csrf_token %}
+					<p class="name">
+						<input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Name" id="name" />
+					</p>
+					<p class="email">
+						<input name="email" type="text" class="validate[required,custom[email]] feedback-input" id="email" placeholder="Email" />
+					</p>
+					<p class="text">
+						<textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Comment"></textarea>
+					</p>
+					<div class="submit">
+						<input type="submit" value="SEND" id="button-blue"/>
+						<div class="ease"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section><!-- End contact -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+	<section class="video">
+		<img class="logo" src="/static/img/logo.png" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
+		<img src="/static/img/video_logo.png" alt="" class="video_logo animated wow fadeInDown"/>
+		<h3 class="animated wow fadeInDown">Please send us your opinions in the form below, thank you!</h3>
+	</section><!-- End video -->
+
+	<!-- Include Footer -->
+	{% include "footer.html" %}
+	<!-- Scripts -->
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox-buttons.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox-media.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox-thumbs.js"></script>
+	<script type="text/javascript" src="/static/js/wow.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+
+
+</body>
+</html>

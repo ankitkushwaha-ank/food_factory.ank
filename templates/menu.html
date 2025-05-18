@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+    <meta name="author" content="pixelhint.com">
+    <meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/fancybox.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
+
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+</head>
+<body>
+
+<!-- Billboard Section -->
+<section class="billboard light">
+    {% include "header.html" %}
+
+    <div class="caption light animated wow fadeInDown clearfix">
+        <h1>We love wonderful tastes and food.</h1>
+        <p>Check out our selection of wonderful Indian cuisine</p>
+    </div>
+
+    <div class="shadow"></div>
+</section>
+
+<!-- Services / Menu Section -->
+<section class="services wrapper">
+
+    <!-- Search Bar -->
+    <form id="search-form" method="get" action="">
+        <input type="text" name="servicename" placeholder="Search..." value="{{ request.GET.servicename }}"/>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Menu Items -->
+    <ul class="clearfix">
+        {% if service_data %}
+            {% for n in service_data %}
+            <li class="animated wow fadeInDown">
+                <img class="icon" src="/media/{{n.service_image}}" alt="Service Image"/>
+
+                <br><br>
+
+                <h2>{{n.service_title}}</h2>
+                <br>
+                <h4>{{n.service_price}} rupees</h4>
+                <br>
+
+                <div class="order">
+                    <button
+                        type="button"
+                        onclick="window.location.href='/menu_detail/{{n.menu_slug}}'"
+                        style="cursor:pointer; border: 1px solid #ccc; padding: 8px 26px; font-size: 20px;"
+                    >
+                        Order
+                    </button >
+                    <button
+                        onclick="add_to_cart({{ n.id }})"
+                        name="addtocart"
+                        style="cursor:pointer; border: 1px solid #ccc; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #FFDF00;"
+                    >
+                        <img src="/static/img/dish.png" alt="cart image" height="16px">
+                    </button>
+                </div>
+                <br><br>
+            </li>
+            {% endfor %}
+        {% else %}
+            <p>No results found for "{{ request.GET.servicename }}"</p>
+        {% endif %}
+    </ul>
+</section>
+
+<!-- Footer -->
+{% include "footer.html" %}
+
+
+<!-- Cart Icon -->
+<div class="cart-icon" id="cart-icon" onclick="toggleCart()">
+    <img src="/static/img/cart_img.png" alt="Cart" height="50px">
+</div>
+
+<!-- Slide-in Cart -->
+<div class="cart" id="cart">
+    <span  style="margin-top:10px;" class="close-btn" onclick="toggleCart()">✖</span>
+    <h2>Your Cart <span class="cart-count" id="item-count">{{ cart|length }} items</span></h2>
+
+    {% for n in cart %}
+    <div class="cart-items">
+        <div class="cart-item">
+            <img src="/media/{{ n.item_image }}" alt="{{ n.item_title }}" onclick="window.location.href='/menu_detail/{{n.item_slug}}'" style="cursor: pointer;">
+            <div class="item-info">
+                <span>{{ n.item_title }}
+                    <span class="delete-btn" onclick="window.location.href='{% url 'remove-item' n.id %}'">Remove</span>
+                </span>
+                <p>Price: {{ n.item_price }} rupees</p>
+                <h5>Quantity: {{ n.item_quantity }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <h2>Total price: <span class="cart-total" id="item-total">₹{{ total_price }} rupees</span></h2>
+
+    <div class="order" style="margin-left:20px; display:flex;">
+        <button
+            type="button"
+            onclick="window.location.href='{% url 'order-cart' %}'"
+            style="cursor:pointer; border: 1px solid #ccc; border-radius: 6px; padding: 8px 26px; font-size: 20px;"
+        >
+            Order
+        </button>
+        <button
+            onclick="removeAll()"
+            name="remove-all"
+            style="cursor:pointer; border: 1px solid #ccc; border-radius: 6px; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #ED2939;"
+        >
+            Remove all
+        </button>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+function toggleCart() {
+    const cart = document.getElementById('cart');
+    const cartIcon = document.getElementById('cart-icon');
+
+    if (cart.classList.contains('open')) {
+        cart.classList.remove('open');
+        cartIcon.classList.remove('hidden');  // Show the icon again
+    } else {
+        cart.classList.add('open');
+        cartIcon.classList.add('hidden');  // Hide the icon
+    }
+}
+
+function refresh() {
+    location.reload();
+}
+
+function add_to_cart(id) {
+    fetch(`/add-to-cart/${id}/`)
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        update_cart();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function update_cart(){
+    location.reload();
+}
+
+function removeAll() {
+    fetch(`/remove_all/`)
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        update_cart();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
+
+</body>
+</html>

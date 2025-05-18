@@ -1,0 +1,49 @@
+<style>
+.admin-profile {
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+  color: #fff;
+  z-index: 1000;
+  font-family: 'Times New Roman', serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+</style>
+<header class="wrapper light">
+	<a href="/"><img class="logo" src="/static/img/logo.png" alt="Restaurant Logo"/></a>
+	<nav>
+		<ul class="nav-links">
+			<li class="{% if request.path == '/' %} active {% endif %}" style="{% if request.path == '/' %} background-color: #FFD700 ; border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/">Home</a></li>
+			<li class="{% if request.path == '/menu/' %}active{% endif %}" style="{% if request.path == '/menu/' %} background-color: #FFD700; border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/menu">Menu</a></li>
+			<li class="{% if request.path == '/karaoke/' %} active {% endif %}" style="{% if request.path == '/karaoke/' %} background-color: #FFD700; border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/karaoke">Karaoke/Party</a></li>
+			<li class="{% if request.path == '/promotions/' %} active {% endif %}" style="{% if request.path == '/promotions/' %} background-color: #FFD700;border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/promotions">Promotions/Events</a></li>
+			<li class="{% if request.path == '/contact/' %} active {% endif %}" style="{% if request.path == '/contact/' %} background-color: #FFD700; border-radius: 4px; padding: 5px 10px; {% endif %}"><a href="/contact">Contact Us</a></li>
+		</ul>
+
+		{% if webuser %}
+		  <div class="admin-profile">
+			  👋 Hello, {{ webuser.username }} |
+			  <a style="color: #fff; text-decoration:none;" href="{% url 'user-logout' %}"> -
+			  </a>
+		</div>
+		{% else %}
+		  <div class="admin-profile">
+			<a style="text-decoration:none;" href="/login">Login</a>
+		  </div>
+		{% endif %}
+
+	</nav>
+</header>
+
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+  feather.replace()
+</script>

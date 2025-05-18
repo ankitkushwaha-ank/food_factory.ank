@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}What You Eat{% endblock %}
+
+{% block content %}
+
+<section class="billboard light">
+    {% include "header.html" %}
+	<head>
+		  <meta charset="UTF-8" />
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		  <title>Product Page</title>
+		  <link rel="stylesheet" href="/static/css/styles.css">
+	</head>
+
+
+    <div class="container">
+
+        <!-- Left: Product Image -->
+        <div class="product-image">
+            <img src="/media/{{ menu_detail.service_image }}" alt="Food Image">
+        </div>
+
+        <!-- Right: Product Details -->
+        <div class="product-details">
+            <h1>{{ menu_detail.service_title }}</h1>
+
+            <div class="ratings">
+                <span class="stars">★ ★ ★ ★ ☆</span>
+                <span class="rating-count">({{ menu_detail.service_rating }})</span>
+                <span class="badge">{{ menu_detail.service_badge }}</span>
+            </div>
+
+            <p class="description">
+                {{ menu_detail.service_desc|safe }}
+            </p>
+
+            <div class="price">
+                {{ menu_detail.service_price }} rupees
+                <span class="mrp">{{ menu_detail.service_oldprice }}</span>
+            </div>
+
+            <div class="deal">
+                Limited time deal - {{ menu_detail.service_deal }}% off
+            </div>
+
+            <div class="buttons">
+                <a href="{% url 'orderpage' menu_detail.menu_slug %}"><button class="buy">Order</button></a>
+                <button onclick="add_to_cart({{ menu_detail.id }})" class="cart">Add to Plate</button>
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+{% include "footer.html" %}
+   <script>
+    function add_to_cart(id) {
+        fetch(`/add-to-cart/${id}/`)
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+             update_cart();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    function update_cart(){
+        location.reload();
+    }
+   </script>
+
+{% endblock %}

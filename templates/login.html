@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin login</title>
+  <link rel="stylesheet" href="/static/css/login.css" />
+  <link rel="icon" href="/static/img/Picturea1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box glass">
+      <h2>Login Admin</h2>
+<!--      <p>Please sign in to your account</p>-->
+      <form method="POST">{% csrf_token %}
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn">Login</button>
+<!--        <p class="footer-text">Forgot password? <a href="#">Reset here</a></p>-->
+      </form>
+    </div>
+  </div>
+</body>
+</html>

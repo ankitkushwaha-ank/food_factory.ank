@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Div Selector</title>
+  <style>
+    .selectable:hover {
+      outline: 2px dashed #00f;
+      cursor: pointer;
+    }
+    .selected {
+      outline: 3px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="enable-selector">Enable Selection</button>
+
+  <div id="div1" class="box selectable" style="width: 100px; height: 100px; background: lightblue; margin: 10px;">Div 1</div>
+  <div id="div2" class="box selectable" style="width: 100px; height: 100px; background: lightgreen; margin: 10px;">Div 2</div>
+  <div id="div3" class="box selectable" style="width: 100px; height: 100px; background: lightcoral; margin: 10px;">Div 3</div>
+
+  <script>
+    let selectionMode = false;
+
+    document.getElementById("enable-selector").addEventListener("click", () => {
+      selectionMode = true;
+      alert("Selection mode activated. Click on a box.");
+    });
+
+    document.querySelectorAll(".selectable").forEach(div => {
+      div.addEventListener("click", function () {
+        if (selectionMode) {
+          document.querySelectorAll(".selectable").forEach(d => d.classList.remove("selected"));
+          this.classList.add("selected");
+          selectionMode = false; // disable mode after one selection
+          alert("Selected div ID: " + this.id);
+          // You can also use this.id in JS logic here
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
