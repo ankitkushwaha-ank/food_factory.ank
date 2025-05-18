@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-7a&(!rga6lhdlh-!uai8q_3abj98bw+@&)u5a!$d6!c--w&3vq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('https://food-factory-41z6.onrender.com/', 'localhost')]
+ALLOWED_HOSTS = ['food-factory-41z6.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
