@@ -23,7 +23,7 @@ def user_login(request):
                 request.session['username'] = user.username
                 user.last_login = timezone.now()
                 user.save()
-                return redirect('home')
+                return redirect('menu')
             else:
                 messages.error(request, "Invalid password")
         except WebUsers.DoesNotExist:
@@ -60,7 +60,7 @@ def require_login(view_func):
     def _wrapped_view(request, *args, **kwargs):
         user_id = request.session.get('user_id')
         if not user_id:
-            return JsonResponse({'message': ' first loggin to your account! '})
+            return redirect('user-login')
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
