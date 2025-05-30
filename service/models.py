@@ -1,5 +1,4 @@
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.db import models
 from tinymce.models import HTMLField
 from autoslug import AutoSlugField
@@ -15,7 +14,7 @@ class service(models.Model):
     service_rating = models.CharField(max_length=20, null=True, default="100", blank=True)
     service_badge = models.CharField(max_length=20, null=True, default="Amazon's Choice", blank=True)
     service_desc = HTMLField(blank=True)
-    menu_slug = AutoSlugField(populate_from='service_title', unique=True, null=True, default=None)
+    menu_slug = AutoSlugField(populate_from='service_title', unique=True, null=False, default=None)
     service_deal = models.IntegerField(null=True, default=20, blank=True)
     discount = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
 
@@ -30,20 +29,17 @@ class service(models.Model):
 
 
 # Cart model
-
 class Cart(models.Model):
     cart_user = models.ForeignKey(WebUsers, on_delete=models.CASCADE, related_name='cart_items')
-    item_title = models.CharField(max_length=50, blank=True, null=True)
-    item_price = models.IntegerField(blank=True, null=True)
-    item_rating = models.CharField(max_length=20, default="100", blank=True, null=True)
-    item_image = models.FileField(upload_to='food/', max_length=250, blank=True, null=True, default=None)
+    item_title = models.CharField(max_length=50, null=True, blank=True)
+    item_price = models.IntegerField(null=True, blank=True)
+    item_rating = models.CharField(max_length=20, null=True, default="100", blank=True)
+    item_image = models.FileField(upload_to='food/', max_length=250, null=True, blank=True)
     item_quantity = models.PositiveIntegerField(default=1)
-    item_slug = AutoSlugField(populate_from='item_title', unique=True, null=True, default=None)
+    item_slug = AutoSlugField(populate_from='item_title', unique=True, null=False, default=None)
 
     def __str__(self):
         return self.item_title or "Cart Item"
-
-
 
 
 # Main Page model
@@ -51,7 +47,7 @@ class mainpage(models.Model):
     mainpage_image = models.FileField(upload_to='mainpage/', max_length=250, null=True, default="/mainpage/set-vector.jpg")
     mainpage_title = models.CharField(max_length=50)
     mainpage_desc = HTMLField()
-    mainpage_slug = AutoSlugField(populate_from='mainpage_title', unique=True, null=True, default=None)
+    mainpage_slug = AutoSlugField(populate_from='mainpage_title', unique=True, null=False, default=None)
 
     def __str__(self):
         return self.mainpage_title or "Main Page"
