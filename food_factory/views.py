@@ -72,7 +72,6 @@ def require_login(view_func):
 
 def index_page(request):
     mainpage_data = mainpage.objects.all()
-    Cart.objects.all().delete()
     return render(request, "index.html", {"mainpage_data": mainpage_data})
 
 def menu_page(request):
@@ -225,8 +224,6 @@ def remove_all(request):
 def order_sucess(request):
     return render(request,'ordersucess.html')
 
-def order_deatil(request):
-    return render(request,'order_detail.html')
 
 @require_login
 def track_order(request):
@@ -244,3 +241,12 @@ def page_not_found2(request,pa,an,er):
 
 def page_not_found3(request,path,ank,error,error1):
     return render(request,'404_error.html')
+
+def page_in_progress(request):
+    return render(request,'in_progress.html')
+
+def profile(request):
+    return render(request,'profile.html')
+
+def order_deatil(request):
+    return render(request,'in_progress.html')

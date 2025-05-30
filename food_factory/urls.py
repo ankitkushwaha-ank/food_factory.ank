@@ -28,11 +28,14 @@ urlpatterns = [
     path('logout/', views.user_logout, name='user-logout'),
     path('order-sucess/', views.order_sucess, name='order-sucess'),
     path('track-order/', views.track_order, name='track-order'),
-    path('order-detail/', views.order_deatil, name='order-detail'),
+    # path('order-detail/', views.order_deatil, name='order-detail'),
+    path('page-under-construction/', views.order_deatil, name='order-detail'),
     path('<path>/', views.page_not_found, name='error-page'),
     path('<path>/<ank>/', views.page_not_found1, name='error-page1'),
     # path('<pa>/<an>/<er>', views.page_not_found2, name='error-page2'),
     path('<path>/<ank>/<error>/<error1>', views.page_not_found3, name='error-page3'),
+    path('page-in-progress/', views.page_in_progress, name='page-in-progress'),
+    path('profile/', views.profile, name='profile-page'),
 ]
 
 # Serving static files during development (only for DEBUG mode)
