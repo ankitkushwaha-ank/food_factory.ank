@@ -13,43 +13,6 @@
     <link rel="stylesheet" href="/static/css/menu.css">
     <link rel="icon" type="image/png" href="/static/img/favicon.png">
 
-    <style>
-        .error-message {
-            background-color: rgba(255, 0, 0, 0.1);
-            color: #cc0000;
-            border: 1px solid #ff4d4d;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            position: relative;
-            font-size: 14px;
-        }
-        .close-btn {
-            position: absolute;
-            top: 8px;
-            right: 12px;
-            color: #cc0000;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-size: 30px;
-        }
-        .success-message {
-            background-color: rgba(0, 255, 0, 0.1);
-            color: #008000;
-            border: 1px solid #00cc00;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            position: fixed;
-            top: 10px;
-            right: 600px;
-            z-index: 9999;
-            font-size: 14px;
-            display: none;
-        }
-    </style>
 </head>
 <body>
 
@@ -92,7 +55,7 @@
             {% for n in service_data %}
             <li class="animated wow fadeInDown">
                 {% if n.service_image %}
-                    <img src="{{ n.service_image.url }}" alt="{{ n.service_title }}">
+                    <img style="border-radius:5%;" src="{{ n.service_image.url }}" alt="{{ n.service_title }}">
                 {% else %}
                     <img src="/media/food/set-vector.jpg" alt="{{ n.service_title }}">
                 {% endif %}

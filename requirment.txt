@@ -34,7 +34,7 @@ Requirments:-
     pip install gunicorn
 
 #for push to github
-    cd /path/to/your/project
+    cd E:\Programs\Django\food_factory
     git init
     git remote add origin https://github.com/ankitkushwaha-ank/food_factory.git
     git add .
