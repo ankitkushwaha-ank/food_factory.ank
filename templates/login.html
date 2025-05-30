@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin login</title>
+  <link rel="stylesheet" href="/static/css/login.css" />
+  <link rel="icon" href="/static/img/Picturea1.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+  <style>
+    .error-message {
+      background-color: rgba(255, 0, 0, 0.1); /* red with 10% opacity */
+      color: #cc0000;
+      border: 1px solid #ff4d4d;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      position: relative;
+      font-size: 14px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      color: #cc0000;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+    }
+  </style>
+<body>
+  <div class="login-container">
+    <div class="login-box glass">
+      <h2>Login Admin</h2>
+
+      {% if messages %}
+        <div class="error-message" id="error-box">
+          {% for message in messages %}
+            <span>{{ message }}</span>
+          {% endfor %}
+          <button class="close-btn" onclick="document.getElementById('error-box').style.display='none';">×</button>
+        </div>
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

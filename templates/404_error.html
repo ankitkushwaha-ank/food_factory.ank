@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Page Not Found</title>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .container h1 {
+      font-size: 8rem;
+      margin-bottom: 20px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    .container h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .container p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.85;
+    }
+
+    .container a {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #ffffff;
+      color: #1e3c72;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .container a:hover {
+      background-color: #f1f1f1;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container h1 {
+        font-size: 6rem;
+      }
+      .container h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>Oops! Page not found</h2>
+    <p>The page you’re looking for doesn’t exist or has been moved.</p>
+    <a href="/">Go Home</a>
+  </div>
+</body>
+</html>

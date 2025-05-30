@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order your meal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      color: #fff;
+    }
+
+    .order-container {
+      width: 100%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 30px;
+      color: #00ffe0;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #b2ffff;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      font-size: 15px;
+      color: #ffffff;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #00ffe0;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 8px #00ffe0;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .radio-group label {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radio-group label:hover {
+      background: rgba(0, 255, 255, 0.2);
+    }
+
+    .radio-group input {
+      accent-color: #00ffe0;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      background: linear-gradient(to right, #00ffe0, #00ff88);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .online-options {
+      margin-top: 20px;
+      display: none;
+      flex-wrap: wrap;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .payment-option {
+      flex: 1 1 45%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #b2ffff;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .payment-option:hover {
+      background: rgba(0, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .payment-option img {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      object-fit: cover;
+      box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+      background: white;
+      padding: 2px;
+    }
+
+    .card-details {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .card-details input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .card-details input:focus {
+      border-color: #00ffe0;
+      box-shadow: 0 0 8px #00ffe0;
+      outline: none;
+    }
+
+    @media (max-width: 600px) {
+      .order-container {
+        padding: 25px 20px;
+      }
+
+      .form-group-flex {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="order-container">
+  <h2>🍕 Order your meal</h2>
+  <form action="{% url 'order-submit' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label>Order Type</label>
+      <div class="radio-group">
+        <label><input type="radio" name="order_type" value="Delivery" checked> Delivery</label>
+        <label><input type="radio" name="order_type" value="Pickup"> Pickup</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" required>
+    </div>
+
+    <div class="form-group" style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+      <div style="flex: 1;">
+        <label>Food Item</label>
+        <div style="height: 40px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 15px;
+            color: #ffffff;">
+          {{ all_items|join:", " }} {{ item.service_title }}
+        </div>
+        <input type="hidden" name="food_title" value="{{ all_items|join:', ' }}{{ item.service_title }}">
+      </div>
+
+      <div style="flex: 1;">
+        <label>Food Price</label>
+        <div style="height: 40px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 15px;
+            color: #ffffff;">
+          {{ item.service_price }}{{ total_price }} rupees
+        </div>
+        <input type="hidden" name="price" value="{{ item.service_price }}{{ total_price }}">
+      </div>
+
+      <div style="flex: 1;">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="addons">Special Instructions</label>
+      <textarea id="addons" name="addons" rows="3" placeholder="Extra cheese, no mayo, etc..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Payment Method</label>
+      <div class="radio-group">
+        <label><input type="radio" name="payment" value="Cash" checked> Cash</label>
+        <label><input type="radio" name="payment" value="Card"> Card</label>
+        <label><input type="radio" name="payment" value="Online" id="online-payment"> Online</label>
+      </div>
+    </div>
+
+    <div class="online-options" id="online-options">
+      <div class="payment-option"><img src="/static/img/India-UPI.jpg" alt="UPI"> Pay with UPI</div>
+      <div class="payment-option"><img src="/static/img/phonepe.png" alt="PhonePe"> PhonePe</div>
+      <div class="payment-option"><img src="/static/img/google pay.jpg" alt="GPay"> Google Pay</div>
+      <div class="payment-option"><img src="/static/img/paytm.png" alt="Paytm"> Paytm</div>
+    </div>
+
+    <div class="card-details" id="card-details">
+      <div class="form-group">
+        <label for="card-name">Name on Card</label>
+        <input type="text" id="card-name" name="card_name" placeholder="Ankit kushwaha">
+      </div>
+      <div class="form-group">
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" name="card_number" maxlength="19" placeholder="xxxx-xxxx-xxxx-xxxx">
+      </div>
+      <div class="form-group">
+        <label for="expiry-date">Expiry Date</label>
+        <input type="month" id="expiry-date" name="expiry_date">
+      </div>
+    </div>
+
+    <br>
+    <button type="submit" class="submit-btn">Confirm Order</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const paymentRadios = document.getElementsByName('payment');
+    const cardDetails = document.getElementById('card-details');
+    const onlineOptions = document.getElementById('online-options');
+
+    const expiryInput = document.getElementById('expiry-date');
+    if (expiryInput) {
+      expiryInput.setAttribute('min', new Date().toISOString().slice(0, 7));
+      expiryInput.setAttribute('max', '2048-12');
+    }
+
+    paymentRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'Card' && radio.checked) {
+          cardDetails.style.display = 'block';
+          onlineOptions.style.display = 'none';
+        } else if (radio.value === 'Online' && radio.checked) {
+          onlineOptions.style.display = 'flex';
+          cardDetails.style.display = 'none';
+        } else {
+          cardDetails.style.display = 'none';
+          onlineOptions.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

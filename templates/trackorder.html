@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Tracking Page</title>
+  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .info-bar {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      flex: 1;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .status-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .status-section h2 {
+      color: #2b8a3e;
+      margin-bottom: 5px;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+
+    .progress-step {
+      text-align: center;
+      width: 20%;
+    }
+
+    .progress-step .circle {
+      width: 18px;
+      height: 18px;
+      background-color: #2b8a3e;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    .progress-step.inactive .circle {
+      background-color: #ccc;
+    }
+
+    .progress-step p {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .progress-line {
+      position: absolute;
+      top: 9px;
+      left: 9%;
+      width: 82%;
+      height: 2px;
+      background-color: #2b8a3e;
+      z-index: -1;
+    }
+
+    .map-section {
+      margin-top: 40px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .shipping-info {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+    .rider-info {
+        margin-top: 20px ;
+        margin-left: 150px;
+        font-size:14px;
+        color:#555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>ORDER TRACKING PAGE</h1>
+    <p class="note">Please note that these are accurate but not guaranteed estimates. Delivery time is subject to change without advanced notice.</p>
+
+    <div class="info-bar">
+      <div class="info-item">
+        <strong>ORDER PLACED</strong><br>May 23,2025
+      </div>
+      <div class="info-item">
+        <strong>TOTAL</strong><br>rupees 120
+      </div>
+      <div class="info-item">
+        <strong>SHIP TO</strong><br>patna,bihar
+      </div>
+      <div class="info-item">
+        <strong>ORDER #</strong><br>#1006
+      </div>
+    </div>
+
+    <div class="status-section">
+      <h2>Order Status: Order Placed</h2>
+      <p>Estimated Delivery time: 10 mins</p>
+
+      <div class="progress-bar">
+        <div class="progress-line"></div>
+
+        <div class="progress-step">
+          <div class="circle"></div>
+          <p>Order Placed<br><small>May 20</small></p>
+        </div>
+        <div class="progress-step">
+          <div class="circle"></div>
+          <p>preparing your Order<br><small>May 21–27</small></p>
+        </div>
+        <div class="progress-step">
+          <div class="circle"></div>
+          <p>Order is dispatched<br><small>June 28–27</small></p>
+        </div>
+        <div class="progress-step inactive">
+          <div class="circle"></div>
+          <p>your order is on the way<br><small>29 Jul–4 Aug</small></p>
+        </div>
+        <div class="progress-step inactive">
+          <div class="circle"></div>
+          <p>Delivered<br><small>—</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-info">
+      <strong>Order Information:</strong><br>
+      [Customer Name]<br>
+      [Hostel Number]<br>
+      bihita, patna,bihar
+    </div>
+    <div class="Rider-info">
+      <strong>Rider Information:</strong><br>
+      [Rider Name]<br>
+      [Rider Number]<br>
+
+    </div>
+
+    <div class="map-section">
+      <iframe src="https://maps.google.com/maps?q=patna,%20NE&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </div>
+
+</body>
+</html>

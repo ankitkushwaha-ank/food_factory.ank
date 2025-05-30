@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}orders{% endblock %}
+
+{% block content %}
+    <head>
+		  <meta charset="UTF-8" />
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		  <link rel="stylesheet" href="/static/css/orderdetail.css">
+	</head>
+<section class="billboard light">
+    {% include "header.html" %}
+
+
+    <div  class="container">
+        <img style="height:200px;" class="icon" src="\media\food\pasta.jpg" alt="Service Image"/>
+
+        <br><br>
+
+        <h2 >hii ankit</h2>
+        <br>
+        <h4 >100 rupees</h4>
+        <br>
+
+        <div class="order">
+            <button
+                type="button"
+                onclick="window.location.href='/menu_detail/{{n.menu_slug}}'"
+                style="cursor:pointer; border: 1px solid #ccc; padding: 8px 26px; font-size: 20px;"
+            >
+                Order
+            </button >
+            <button
+                onclick="add_to_cart({{ n.id }})"
+                name="addtocart"
+                style="cursor:pointer; border: 1px solid #ccc; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #FFDF00;"
+            >
+                <img src="/static/img/dish.png" alt="cart image" height="16px">
+            </button>
+        </div>
+        <br><br>
+    </div>
+</section>
+{% include "footer.html" %}
+
+
+{% endblock %}

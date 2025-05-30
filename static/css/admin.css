@@ -1,0 +1,421 @@
+:root {
+  --blur-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --card-radius: 20px;
+  --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  display: flex;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 260px;
+  padding: 30px 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.main {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.topbar h1 {
+  font-size: 2rem;
+}
+
+.admin-profile {
+  background: var(--glass-bg);
+  padding: 12px 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  font-weight: 500;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.card {
+  padding: 25px;
+  border-radius: var(--card-radius);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  backdrop-filter: blur(15px);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #d1d5db;
+}
+
+.card p {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+#add-food-form {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid var(--glass-border);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.menu-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.menu-item img {
+  max-width: 100%;
+  border-radius: 10px;
+  height: 170px;
+  object-fit: cover;
+}
+
+.menu-item h3 {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.menu-item p {
+  color: #ccc;
+}
+
+.admin-section {
+  display: none;
+  margin-top: 20px;
+}
+
+.admin-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+td {
+  color: #ccc;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .menu-item {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-item {
+    width: 100%;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+#add-food-form {
+  background: #1e1e2f;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  color: #fff;
+  width: 100%;
+  max-width: 700px;
+  font-family: 'Inter', sans-serif;
+}
+
+#add-food-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-food-form input,
+#add-food-form textarea,
+#add-food-form button {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a40;
+  color: #fff;
+  font-size: 16px;
+}
+
+#add-food-form input::placeholder,
+#add-food-form textarea::placeholder {
+  color: #999;
+}
+
+#add-food-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+#add-food-form input[type="file"] {
+  background: none;
+  padding: 0;
+  color: #fff;
+}
+
+#add-food-form button {
+  background: #4caf50;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#add-food-form button:hover {
+  background: #43a047;
+}
+
+
+.home-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.home-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+
+.home-item img {
+  max-width: 100%;
+  border-radius: 10px;
+  height: 170px;
+  object-fit: cover;
+}
+
+.home-item h3 {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.home-item p {
+  color: #ccc;
+}
+
+
+#add-news-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-news-form input,
+#add-news-form textarea,
+#add-news-form button {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a40;
+  color: #fff;
+  font-size: 16px;
+}
+
+#add-news-form input::placeholder,
+#add-news-form textarea::placeholder {
+  color: #999;
+}
+
+#add-news-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+#add-news-form input[type="file"] {
+  background: none;
+  padding: 0;
+  color: #fff;
+}
+
+#add-news-form button {
+  background: #4caf50;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#add-news-form button:hover {
+  background: #43a047;
+}
+
+.selectable:hover {
+  outline: 2px dashed #00f;
+  cursor: pointer;
+}
+.selected {
+  outline: 3px solid red;
+}
+
+.remove-food1 button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.remove-food button {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 16px;
+    padding: 10px 6px;
+    width: 100%;
+    border-radius:04px;
+    color: red;
+    word-break: break-word;
+}

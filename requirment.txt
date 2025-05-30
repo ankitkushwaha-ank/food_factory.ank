@@ -1,0 +1,37 @@
+Installation & Package Management
+    pip install django         # Install Django in your Python environment
+    pip freeze                 # Show all installed Python packages
+
+Django Project & App Management
+    django-admin              # Display available django-admin commands
+    django-admin startproject mywebsite    # Create a new Django project named 'mywebsite'
+    python manage.py startapp Services     # Create a new app named 'Services' within the project
+
+Running & Testing the Server
+    python manage.py runserver            # Start the development server
+    python manage.py testserver           # [Invalid Command] — (There is no built-in command called 'testserver')
+
+Database Management
+    python manage.py makemigrations       # Create new migrations based on model changes
+    python manage.py migrate              # Apply migrations to the database
+    python manage.py showmigrations       # Show a list of all migrations and their status
+
+User Management
+    python manage.py createsuperuser      # Create a superuser (admin) account
+    python manage.py changepassword admin # Change the password for the 'admin' user
+
+Static Files (for Production)
+    python manage.py collectstatic        # Collect all static files into STATIC_ROOT for production
+
+Utilities & Checks
+    python manage.py shell                # Open a Python interactive shell with Django context
+    python manage.py check                # Check the project for common issues
+
+Requirments:-
+    pip install tinymce
+    pip install auto-slug
+    pip install social-auth-app-django
+    pip install gunicorn
+
+
+

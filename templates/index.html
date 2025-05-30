@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+	{% block title %}welcome to Food factory{% endblock %}
+
+
+{% block content%}
+	<section class="billboard light">
+		<!-- Include Header -->
+		{% include "header.html" %}
+
+		<div class="caption light animated wow fadeInDown clearfix">
+			<h1>Welcome to Food factory</h1>
+			<p>Flavors You’ll Fall For — A Perfect Spot for Food Lovers</p>
+			<hr>
+		</div>
+		<div class="shadow"></div>
+	</section><!-- End billboard -->
+
+
+	<section class="services wrapper">
+		<ul class="clearfix">
+			{% for n in mainpage_data %}
+				<li class="animated wow fadeInDown">
+					<img class="icon" src="/media/{{n.mainpage_image}}" alt=""/>
+					<span class="separator"></span>
+					<h2>{{n.mainpage_title}}</h2>
+					<p>{{n.mainpage_desc |safe}}</p>
+				</li>
+			{% endfor %}
+		</ul>
+	</section><!-- End service -->
+
+
+	<section class="video">
+		<img class="logo" src="/static/img/logo.png" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
+		<h3 class="animated wow fadeInDown">The icing on the cake is our prompt, efficient and personalized service.</h3>
+		<a href="#" id="play_btn" class="fancybox animated wow flipInX" data-wow-duration="2s"></a>
+	</section><!-- End video -->
+
+	<section class="testimonials wrapper">
+		<div class="title animated wow fadeIn">
+			<h2>We have Karaoke too!</h2>
+			<h3>Apart from the mouth-watering food, we offer private dining rooms with Karaoke facilities in every room and a wide variety of song selections. (Rooms can adequately accommodate 10 to 45 people)</h3>
+			<hr class="separator"/>
+		</div>
+	</section><!-- End testimonials -->
+
+	<!-- Include Footer -->
+	{% include "footer.html" %}
+
+	<!-- JavaScript Files -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox.js"></script>
+	<script type="text/javascript" src="/static/js/wow.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+
+	<!-- Include HTML script -->
+{% endblock %}

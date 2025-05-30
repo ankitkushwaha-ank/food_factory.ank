@@ -1,0 +1,50 @@
+
+    .services ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 40px;
+    list-style: none;
+    padding: 40px 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    }
+
+    .services ul li {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+    .services ul li:hover {
+        transform: translateY(-5px);
+    }
+    .services ul li img.icon {
+        width: 100%;
+        max-height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .services ul li h2 {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+    .services ul li h4 {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 15px;
+    }
+    .services .order button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .services .order button:hover {
+        background-color: #45a049;
+    }
