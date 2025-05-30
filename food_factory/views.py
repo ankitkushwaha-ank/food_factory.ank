@@ -72,7 +72,6 @@ def require_login(view_func):
 
 def index_page(request):
     mainpage_data = mainpage.objects.all()
-    Cart.objects.all().delete()
     return render(request, "index.html", {"mainpage_data": mainpage_data})
 
 def menu_page(request):
