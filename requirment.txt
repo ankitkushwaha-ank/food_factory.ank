@@ -33,5 +33,14 @@ Requirments:-
     pip install social-auth-app-django
     pip install gunicorn
 
+#for push to github
+    cd /path/to/your/project
+    git init
+    git remote add origin https://github.com/ankitkushwaha-ank/food_factory.git
+    git add .
+    git commit -m "Initial commit with Django models"
+    git pull origin main --allow-unrelated-histories
+    git push origin main
+
 
 
