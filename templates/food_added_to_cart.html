@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Added</title>
+    <link rel="stylesheet" href="/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/menu.css">
+    <link rel="icon" href="/static/img/favicon.png" type="image/png">
+</head>
+<body>
+<!-- Confirmation Section -->
+<section class="billboard light">
+{% include "header.html" %}
+    <div class="caption light animated wow fadeInDown clearfix">
+        <h1>Item Added to Cart!</h1>
+        <p>Thanks for adding <strong>{{ item_name }}</strong> to your cart.</p>
+    </div>
+    <div class="shadow"></div>
+</section>
+
+<section class="services wrapper animated fadeInUp">
+    <div style="text-align: center;">
+        <img src="/static/img/dish.png" alt="cart icon" height="100px"><br><br>
+        <h2>What would you like to do next?</h2><br>
+        <div class="order" style="margin: 20px auto; display: flex; justify-content: center;">
+            <button onclick="window.location.href='{% url 'menu' %}'" style="padding: 10px 20px; font-size: 18px;">Back to Menu</button>
+            <button onclick="window.location.href='{% url 'cart' %}'" style="padding: 10px 20px; margin-left: 15px; font-size: 18px;">View Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+{% include "footer.html" %}
+
+</body>
+</html>

@@ -51,38 +51,36 @@
         </div>
       </section>
 
-       <!-- Home page -->
       <section id="home-section" class="admin-section">
-        <div class="topbar">
-          <h2>Home page</h2>
-          <button id="add-news-btn" class="btn">Add News</button>
-        </div>
-          <button
-                  id="enable-selector" class="btn" style="background-color:red;">Remove News</button>
+    <div class="topbar">
+      <h2>Home page</h2>
+      <button id="add-news-btn" class="btn">Add News</button>
+    </div>
 
-        <!-- Form Toggle -->
-        <div id="add-news-form" style="display: none;">
-          <form method="POST" action="{% url 'add-news' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="image" required><br>
-            <input type="text" name="title" placeholder="Food Title" required><br>
-            <textarea name="desc" placeholder="Description"></textarea><br>
-            <button type="submit">Add</button>
-          </form>
-        </div><br>
+    <!-- Form Toggle -->
+    <div id="add-news-form" style="display: none;">
+      <form method="POST" action="{% url 'add-news' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" required><br>
+        <input type="text" name="title" placeholder="Food Title" required><br>
+        <textarea name="desc" placeholder="Description"></textarea><br>
+        <button type="submit">Add</button>
+      </form>
+    </div><br>
 
-        <div class="home-list">
-          {% for item in main %}
-          <div class="menu-item">
-            <img src="{{ item.mainpage_image.url }}" alt="{{ item.mainpage_title }}">
-            <div>
-              <h3>{{ item.mainpage_title }}</h3>
-              <p>{{ item.mainpage_desc|safe }}</p>
-            </div>
-          </div>
-          {% endfor %}
+    <div class="home-list">
+      {% for item in main %}
+      <div class="menu-item">
+        <img src="{{ item.mainpage_image.url }}" alt="{{ item.mainpage_title }}">
+        <div>
+          <h3>{{ item.mainpage_title }}</h3>
+          <p>{{ item.mainpage_desc|safe }}</p>
         </div>
-      </section>
+              <button type="submit" onclick="window.location.href='{% url 'remove-news' item.id %}'" class="btn" style="background-color: red; color: white;">Remove News</button>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 
       <!-- Menu -->
       <section id="menu-section" class="admin-section">

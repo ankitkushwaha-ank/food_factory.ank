@@ -32,10 +32,12 @@ urlpatterns = [
     path('page-under-construction/', views.order_deatil, name='order-detail'),
     path('<path>/', views.page_not_found, name='error-page'),
     path('<path>/<ank>/', views.page_not_found1, name='error-page1'),
-    # path('<pa>/<an>/<er>', views.page_not_found2, name='error-page2'),
+    # path('<pa>/<an>/<er>', views.page_not_found2, name='error-page11'),
     path('<path>/<ank>/<error>/<error1>', views.page_not_found3, name='error-page3'),
     path('page-in-progress/', views.page_in_progress, name='page-in-progress'),
     path('profile/', views.profile, name='profile-page'),
+    path('food_added_to_cart/', views.food_added_to_cart, name='food_added_to_cart'),
+    path('remove-news/<int:tem_id>/', views.remove_news, name='remove-news'),
 ]
 
 # Serving static files during development (only for DEBUG mode)

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Menu</title>
-    <meta name="author" content="pixelhint.com">
-    <meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
+    <meta name="author" content="your-site-name">
+    <meta name="description" content="Delicious menu of Indian cuisine.">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/static/css/reset.css">
@@ -12,17 +12,16 @@
     <link rel="stylesheet" href="/static/css/animate.css">
     <link rel="stylesheet" href="/static/css/menu.css">
     <link rel="icon" type="image/png" href="/static/img/favicon.png">
-
 </head>
 <body>
 
-<!-- Success Message Toast -->
+<!-- Success Toast Message -->
 <div id="success-message" class="success-message">
     <span id="success-text"></span>
     <button class="close-btn" onclick="hideSuccessAndRefresh();">&times;</button>
 </div>
 
-<!-- Billboard Section -->
+<!-- Billboard -->
 <section class="billboard light">
     {% include "header.html" %}
 
@@ -43,7 +42,7 @@
     <div class="shadow"></div>
 </section>
 
-<!-- Services / Menu Section -->
+<!-- Menu Section -->
 <section class="services wrapper">
     <form id="search-form" method="get" action="">
         <input type="text" name="servicename" placeholder="Search..." value="{{ request.GET.servicename }}"/>
@@ -61,12 +60,12 @@
                 {% endif %}
 
                 <br><br>
-                <h2>{{n.service_title}}</h2><br>
-                <h4>{{n.service_price}} rupees</h4><br>
+                <h2>{{ n.service_title }}</h2><br>
+                <h4>{{ n.service_price }} rupees</h4><br>
 
                 <div class="order">
-                    <button type="button" onclick="window.location.href='/menu_detail/{{n.menu_slug}}'" style="cursor:pointer; border: 1px solid #ccc; padding: 8px 26px; font-size: 20px;">Order</button>
-                    <button onclick="add_to_cart({{ n.id }})" name="addtocart" style="cursor:pointer; border: 1px solid #ccc; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #FFDF00;">
+                    <button type="button" onclick="window.location.href='/menu_detail/{{ n.menu_slug }}'" style="cursor:pointer; border: 1px solid #ccc; padding: 8px 26px; font-size: 20px;">Order</button>
+                    <button onclick="add_to_cart({{ n.id }})" type="button" style="cursor:pointer; border: 1px solid #ccc; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #FFDF00;">
                         <img src="/static/img/dish.png" alt="cart image" height="16px">
                     </button>
                 </div><br><br>
@@ -81,51 +80,8 @@
 <!-- Footer -->
 {% include "footer.html" %}
 
-<!-- Cart Icon -->
-<div class="cart-icon" id="cart-icon" onclick="toggleCart()">
-    <img src="/static/img/cart_img.png" alt="Cart" height="50px">
-</div>
-
-<!-- Slide-in Cart -->
-<div class="cart" id="cart">
-    <span style="margin-top:10px;" class="close-btn" onclick="toggleCart()">&times;</span>
-    <h2>Your Cart <span class="cart-count" id="item-count">{{ total_item }} items</span></h2>
-
-    {% for n in cart %}
-    <div class="cart-items">
-        <div class="cart-item">
-            <img src="/media/{{ n.item_image }}" alt="{{ n.item_title }}" onclick="window.location.href='/menu_detail/{{n.item_slug}}'" style="cursor: pointer;">
-            <div class="item-info">
-                <span>{{ n.item_title }} <span class="delete-btn" onclick="window.location.href='{% url 'remove-item' n.id %}'">Remove</span></span>
-                <p>Price: {{ n.item_price }} rupees</p>
-                <h5>Quantity: {{ n.item_quantity }}</h5>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-    <h2>Total price: <span class="cart-total" id="item-total">₹{{ total_price }} rupees</span></h2>
-
-    <div class="order" style="margin-left:20px; display:flex;">
-        <button type="button" onclick="window.location.href='{% url 'order-cart' %}'" style="cursor:pointer; border: 1px solid #ccc; border-radius: 6px; padding: 8px 26px; font-size: 20px;">Order</button>
-        <button onclick="removeAll()" name="remove-all" style="cursor:pointer; border: 1px solid #ccc; border-radius: 6px; padding: 8px 16px; font-size: 20px; margin-left:16px; background-color: #ED2939;">Remove all</button>
-    </div>
-</div>
-
 <!-- Scripts -->
 <script>
-function toggleCart() {
-    const cart = document.getElementById('cart');
-    const cartIcon = document.getElementById('cart-icon');
-    if (cart.classList.contains('open')) {
-        cart.classList.remove('open');
-        cartIcon.classList.remove('hidden');
-    } else {
-        cart.classList.add('open');
-        cartIcon.classList.add('hidden');
-    }
-}
-
 function showSuccessMessage(msg) {
     const box = document.getElementById('success-message');
     const text = document.getElementById('success-text');
@@ -135,25 +91,15 @@ function showSuccessMessage(msg) {
 
 function hideSuccessAndRefresh() {
     document.getElementById('success-message').style.display = 'none';
-    location.reload();
+    location.reload(); // Optional: refresh to reflect quantity
 }
-
 function add_to_cart(id) {
     fetch(`/add-to-cart/${id}/`)
         .then(response => response.json())
         .then(data => {
             showSuccessMessage(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
-function removeAll() {
-    fetch(`/remove_all/`)
-        .then(response => response.json())
-        .then(data => {
-            showSuccessMessage(data.message);
+            // Refresh page after 1.5 seconds to update cart quantities
+            setTimeout(() => location.reload(), 1500);
         })
         .catch(error => {
             console.error('Error:', error);

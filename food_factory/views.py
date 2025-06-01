@@ -74,13 +74,26 @@ def index_page(request):
     mainpage_data = mainpage.objects.all()
     return render(request, "index.html", {"mainpage_data": mainpage_data})
 
+
+
 def menu_page(request):
     user_id = request.session.get('user_id')
-    user = get_object_or_404(WebUsers, id=user_id)
-    cart = Cart.objects.filter(cart_user=user)
-    total_price = sum(item.item_price * item.item_quantity for item in cart)
-    total_item = sum(item.item_quantity for item in cart)
-    all_items = [item.item_title for item in cart]
+
+    cart = []
+    total_price = 0
+    total_item = 0
+    all_items = []
+
+    if user_id:
+        try:
+            user = WebUsers.objects.get(id=user_id)
+            cart = Cart.objects.filter(cart_user=user)
+            total_price = sum(item.item_price * item.item_quantity for item in cart)
+            total_item = sum(item.item_quantity for item in cart)
+            all_items = [item.item_title for item in cart]
+        except WebUsers.DoesNotExist:
+            # Optional: clear session if user_id is invalid
+            request.session.flush()
 
     query = request.GET.get('servicename', '')
     service_data = service.objects.filter(service_title__icontains=query) if query else service.objects.all()
@@ -92,6 +105,7 @@ def menu_page(request):
         'total_price': total_price,
         'total_item': total_item
     })
+
 
 @require_login
 def menu_detail(request, slug):
@@ -179,7 +193,9 @@ def ordersubmit(request):
 def cart_page(request):
     user = get_object_or_404(WebUsers, id=request.session.get('user_id'))
     cart = Cart.objects.filter(cart_user=user)
-    return render(request, "cart.html", {'cart': cart})
+    total_price = sum(item.item_price * item.item_quantity for item in cart)
+    total_item = sum(item.item_quantity for item in cart)
+    return render(request, "cart.html", {'cart': cart, 'total_item':total_item, 'total_price':total_price})
 
 @require_login
 def addtocart(request, item_id):
@@ -187,23 +203,24 @@ def addtocart(request, item_id):
     user = get_object_or_404(WebUsers, id=user_id)
     food = get_object_or_404(service, id=item_id)
 
-    cart_item = Cart.objects.filter(cart_user=user, item_slug=food.menu_slug).first()
+    cart_item = Cart.objects.filter(cart_user=user, item_title=food.service_title).first()
 
     if cart_item:
         cart_item.item_quantity += 1
         cart_item.save()
         return JsonResponse({'message': f'One more {food.service_title} added to your plate!'})
+    else:
+        Cart.objects.create(
+            cart_user=user,
+            item_image=food.service_image,
+            item_title=food.service_title,
+            item_rating=food.service_rating,
+            item_price=food.service_price,
+            item_slug=food.menu_slug,
+            item_quantity=1
+        )
+        return JsonResponse({'message': f'{food.service_title} added to your plate!'})
 
-    Cart.objects.create(
-        cart_user=user,
-        item_image=food.service_image,
-        item_title=food.service_title,
-        item_rating=food.service_rating,
-        item_price=food.service_price,
-        item_slug=food.menu_slug,
-        item_quantity=1
-    )
-    return JsonResponse({'message': f'{food.service_title} added to your plate!'})
 
 @require_login
 def remove_item(request, item_id):
@@ -250,3 +267,14 @@ def profile(request):
 
 def order_deatil(request):
     return render(request,'in_progress.html')
+
+def food_added_to_cart(request):
+    return render(request,'food_added_to_cart.html')
+
+def remove_news(request, item_id):
+    print(f"Attempting to delete news item {item_id}")
+    try:
+        mainpage.objects.get(id=item_id).delete()
+    except mainpage.DoesNotExist:
+        print(f"News item {item_id} does not exist")
+    return redirect('admin_dashboard')

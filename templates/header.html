@@ -3,75 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    .logo {
-      height: 50px;
-    }
+  <link rel="stylesheet" href="/static/css/header.css">
 
-    .profile-container {
-      position: absolute;
-      top: 40px;
-      right: 70px;
-      display: inline-block;
-    }
-
-    .profile-pic {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid #fff;
-      cursor: pointer;
-    }
-
-    .profile-pic img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background-color: white;
-      color: black;
-      min-width: 180px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
-
-    .dropdown-menu a {
-      display: block;
-      padding: 10px 15px;
-      text-decoration: none;
-      color: black;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: #f0f0f0;
-    }
-
-    .admin-profile {
-      position: absolute;
-      top: 40px;
-      right: 35px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 12px 20px;
-      border-radius: 99px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      font-weight: 500;
-      color: #fff;
-      z-index: 1000;
-      font-family: "raleway-regular", arial;
-      font-style: bold;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-  </style>
 </head>
 <body>
 
@@ -100,7 +33,8 @@
         <a href="#" style="font-weight: bold; color: rgb(230,123,0); background-color: #e6f0ff; border-bottom: 1px solid #ccc;">
           {{ webuser.username }}
         </a>
-        <a href="order-detail">Profile</a>
+        <a href="{% url 'order-detail' %}">Profile</a>
+        <a href="{% url 'cart_detail' %}">Your Cart</a>
         <a href="{% url 'order-detail' %}">Order</a>
         <a href="{% url 'track-order' %}">Track Order</a>
         <a href="{% url 'contact' %}">Contact us</a>
@@ -116,11 +50,25 @@
   </nav>
 </header>
 
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-<!--  feather.replace();-->
+<!-- AI Chatbot Icon -->
+<div class="chatbot-icon" id="chatbotIcon">
+  <img src="\static\img\Untitled (1).jpg" alt="Chatbot Icon">
+</div>
 
-  // Only run dropdown logic if profilePic exists
+<!-- Chatbox -->
+<div class="chatbox" id="chatbox">
+  <div class="chatbox-header">Ask AI 🍽️</div>
+  <div class="chatbox-body" id="chatboxBody">
+    <div class="bot-message message">Hi! I'm your AI assistant. How can I help?</div>
+  </div>
+  <div class="chatbox-footer">
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  // Profile dropdown toggle
   const profilePic = document.getElementById('profilePic');
   const dropdownMenu = document.getElementById('dropdownMenu');
   const profileContainer = document.getElementById('profileContainer');
@@ -130,12 +78,39 @@
       dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', function(event) {
       if (!profileContainer.contains(event.target)) {
         dropdownMenu.style.display = 'none';
       }
     });
+  }
+
+  // Chatbot logic
+  const chatbotIcon = document.getElementById('chatbotIcon');
+  const chatbox = document.getElementById('chatbox');
+  const chatboxBody = document.getElementById('chatboxBody');
+
+  chatbotIcon.addEventListener('click', () => {
+    chatbox.style.display = chatbox.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  function sendMessage() {
+    const input = document.getElementById('userInput');
+    const text = input.value.trim();
+    if (text) {
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user-message';
+      userMsg.innerText = text;
+      chatboxBody.appendChild(userMsg);
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message bot-message';
+      botMsg.innerText = "I'm just a demo for now! Connect me to Django/OpenAI to reply.";
+      chatboxBody.appendChild(botMsg);
+
+      input.value = '';
+      chatboxBody.scrollTop = chatboxBody.scrollHeight;
+    }
   }
 </script>
 

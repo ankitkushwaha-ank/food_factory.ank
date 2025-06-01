@@ -62,7 +62,7 @@ def AdminDasboard(request):
         'enquierys':enquiery,
         'users':users,
         'webusers':webusers,
-        'main':main
+        'main':main,
     })
 
 
