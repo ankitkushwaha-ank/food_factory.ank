@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% load static %}
 {% block title %}What You Eat{% endblock %}
 
 {% block content %}
@@ -37,9 +38,7 @@
 		  <link rel="stylesheet" href="/static/css/styles.css">
 	</head>
 
-
     <div class="container">
-
 
         <!-- Left: Product Image -->
         <div class="product-image">
@@ -74,8 +73,6 @@
                 <button onclick="add_to_cart({{ menu_detail.id }})" class="cart">Add to Plate</button>
             </div>
         </div>
-
-
 
     </div>
 </section>

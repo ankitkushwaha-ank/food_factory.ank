@@ -129,6 +129,7 @@ body {
   color: #fff;
 }
 
+/* Button */
 .btn {
   background-color: #4CAF50;
   color: white;
@@ -144,65 +145,143 @@ body {
   background-color: #45a049;
 }
 
-#add-food-form {
-  background-color: rgba(255, 255, 255, 0.08);
+/* Add Food / News Forms */
+#add-food-form,
+#add-news-form {
+  background: #1e1e2f;
   padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  color: #fff;
+  width: 100%;
+  max-width: 700px;
+  font-family: 'Inter', sans-serif;
   border: 1px solid var(--glass-border);
 }
 
-.form-group {
-  margin-bottom: 15px;
+#add-food-form form,
+#add-news-form form {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  padding: 8px 12px;
+#add-food-form input,
+#add-food-form textarea,
+#add-food-form button,
+#add-news-form input,
+#add-news-form textarea,
+#add-news-form button {
+  padding: 12px 14px;
+  border-radius: 8px;
   border: none;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #2a2a40;
+  color: #fff;
+  font-size: 16px;
+}
+
+#add-food-form input::placeholder,
+#add-food-form textarea::placeholder,
+#add-news-form input::placeholder,
+#add-news-form textarea::placeholder {
+  color: #999;
+}
+
+#add-food-form textarea,
+#add-news-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+#add-food-form input[type="file"],
+#add-news-form input[type="file"] {
+  background: none;
+  padding: 0;
   color: #fff;
 }
 
-.menu-list {
+#add-food-form button,
+#add-news-form button {
+  background: #4caf50;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+#add-food-form button:hover,
+#add-news-form button:hover {
+  background: #43a047;
+}
+
+/* Menu + Home Items */
+.menu-list,
+.home-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.menu-item {
+.menu-item,
+.home-item {
   background: rgba(255, 255, 255, 0.1);
   padding: 15px;
   border-radius: 10px;
   width: calc(33.333% - 20px);
   box-sizing: border-box;
+  position: relative;
 }
 
-.menu-item img {
+.menu-item img,
+.home-item img {
   max-width: 100%;
   border-radius: 10px;
   height: 170px;
   object-fit: cover;
 }
 
-.menu-item h3 {
+.menu-item h3,
+.home-item h3 {
   margin-top: 10px;
   color: #fff;
 }
 
-.menu-item p {
+.menu-item p,
+.home-item p {
   color: #ccc;
 }
 
+/* Remove Button */
+.remove-food button {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 16px;
+  padding: 10px 6px;
+  width: 100%;
+  border-radius: 4px;
+  color: red;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  border: none;
+}
+
+
+.remove-food1 button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Admin Section Table */
 .admin-section {
   display: none;
   margin-top: 20px;
@@ -240,14 +319,27 @@ td {
   word-break: break-word;
 }
 
+/* Selectable (Editor Tools) */
+.selectable:hover {
+  outline: 2px dashed #00f;
+  cursor: pointer;
+}
+
+.selected {
+  outline: 3px solid red;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
-  .menu-item {
+  .menu-item,
+  .home-item {
     width: calc(50% - 20px);
   }
 }
 
 @media (max-width: 600px) {
-  .menu-item {
+  .menu-item,
+  .home-item {
     width: 100%;
   }
 
@@ -256,166 +348,12 @@ td {
     align-items: flex-start;
     gap: 15px;
   }
-}
-#add-food-form {
-  background: #1e1e2f;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 20px;
-  color: #fff;
-  width: 100%;
-  max-width: 700px;
-  font-family: 'Inter', sans-serif;
-}
 
-#add-food-form form {
-  display: flex;
-  flex-direction: column;
-}
+  .sidebar {
+    width: 200px;
+  }
 
-#add-food-form input,
-#add-food-form textarea,
-#add-food-form button {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: none;
-  background: #2a2a40;
-  color: #fff;
-  font-size: 16px;
-}
-
-#add-food-form input::placeholder,
-#add-food-form textarea::placeholder {
-  color: #999;
-}
-
-#add-food-form textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-#add-food-form input[type="file"] {
-  background: none;
-  padding: 0;
-  color: #fff;
-}
-
-#add-food-form button {
-  background: #4caf50;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#add-food-form button:hover {
-  background: #43a047;
-}
-
-
-.home-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.home-item {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
-  border-radius: 10px;
-  width: calc(33.333% - 20px);
-  box-sizing: border-box;
-}
-
-.home-item img {
-  max-width: 100%;
-  border-radius: 10px;
-  height: 170px;
-  object-fit: cover;
-}
-
-.home-item h3 {
-  margin-top: 10px;
-  color: #fff;
-}
-
-.home-item p {
-  color: #ccc;
-}
-
-
-#add-news-form form {
-  display: flex;
-  flex-direction: column;
-}
-
-#add-news-form input,
-#add-news-form textarea,
-#add-news-form button {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: none;
-  background: #2a2a40;
-  color: #fff;
-  font-size: 16px;
-}
-
-#add-news-form input::placeholder,
-#add-news-form textarea::placeholder {
-  color: #999;
-}
-
-#add-news-form textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-#add-news-form input[type="file"] {
-  background: none;
-  padding: 0;
-  color: #fff;
-}
-
-#add-news-form button {
-  background: #4caf50;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#add-news-form button:hover {
-  background: #43a047;
-}
-
-.selectable:hover {
-  outline: 2px dashed #00f;
-  cursor: pointer;
-}
-.selected {
-  outline: 3px solid red;
-}
-
-.remove-food1 button {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.remove-food button {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.1);
-    font-size: 16px;
-    padding: 10px 6px;
-    width: 100%;
-    border-radius:04px;
-    color: red;
-    word-break: break-word;
+  .main {
+    padding: 20px;
+  }
 }

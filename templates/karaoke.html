@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +6,12 @@
 	<meta charset="utf-8">
 	<meta name="author" content="mr-h4cker.com">
 	<meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
-	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-	<link rel="stylesheet" href="/static/slick/slick.css">
-	<link rel="stylesheet" href="/static/slick/slick-theme.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/karaoke.css">
-	<link rel="icon" type="image/png" href="/static/img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" href="{% static 'slick/slick.css' %}">
+	<link rel="stylesheet" href="{% static 'slick/slick-theme.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/karaoke.css' %}">
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 <body>
 
@@ -29,22 +30,20 @@
 	<section class="services wrapper">
 		<ul class="clearfix">
 			<li class="animated wow fadeInDown">
-				<img class="icon" src="/static/img/02.jpg" alt=""/>
+				<img class="icon" src="{% static 'img/02.jpg' %}" alt=""/>
 			</li>
 			<li class="animated wow fadeInDown" data-wow-delay=".2s">
 				<h3>Food factory offers a vibrant dining experience with several
-					private dining and celebration rooms, perfect for groups of 10 to 45 guests. 
-					Whether you're planning a casual gathering or a special event, our versatile spaces are 
+					private dining and celebration rooms, perfect for groups of 10 to 45 guests.
+					Whether you're planning a casual gathering or a special event, our versatile spaces are
 					designed to suit every occasion.</h3>
 				<span class="separator"></span>
 			</li>
 			<li class="animated wow fadeInDown">
-				<img class="icon" src="/static/img/02.jpg" alt=""/>
+				<img class="icon" src="{% static 'img/02.jpg' %}" alt=""/>
 			</li>
 		</ul>
 	</section><!-- End service -->
-
-
 
 	<!-- Carousel section -->
 	<section class="carousel">
@@ -57,7 +56,7 @@
 			</div>
 
 			<div class="images">
-				<div><img src="/static/img/karaoke.jpg"></div>
+				<div><img src="{% static 'img/karaoke.jpg' %}"></div>
 			</div>
 		</div>
 	</section><!-- End carousel -->
@@ -65,11 +64,6 @@
 	<!-- Include Footer -->
 	{% include "footer.html" %}
 
-	<!-- Scripts -->
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="/static/js/wow.js"></script>
-	<script type="text/javascript" src="/static/js/main.js"></script>
-	<script type="text/javascript" src="/static/slick/slick.min.js"></script>
 
 </body>
 </html>

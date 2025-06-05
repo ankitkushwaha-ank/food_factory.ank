@@ -37,7 +37,7 @@ urlpatterns = [
     path('page-in-progress/', views.page_in_progress, name='page-in-progress'),
     path('profile/', views.profile, name='profile-page'),
     path('food_added_to_cart/', views.food_added_to_cart, name='food_added_to_cart'),
-    path('remove-news/<int:tem_id>/', views.remove_news, name='remove-news'),
+    path('chatbot/', views.chatbot_response, name='chatbot'),
 ]
 
 # Serving static files during development (only for DEBUG mode)

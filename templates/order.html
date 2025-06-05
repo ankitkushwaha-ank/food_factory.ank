@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order your meal</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/static/img/favicon.png">
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
   <style>
     * {
       box-sizing: border-box;
@@ -274,10 +275,10 @@
     </div>
 
     <div class="online-options" id="online-options">
-      <div class="payment-option"><img src="/static/img/India-UPI.jpg" alt="UPI"> Pay with UPI</div>
-      <div class="payment-option"><img src="/static/img/phonepe.png" alt="PhonePe"> PhonePe</div>
-      <div class="payment-option"><img src="/static/img/google pay.jpg" alt="GPay"> Google Pay</div>
-      <div class="payment-option"><img src="/static/img/paytm.png" alt="Paytm"> Paytm</div>
+      <div class="payment-option"><img src="{% static 'img/India-UPI.jpg' %}" alt="UPI"> Pay with UPI</div>
+      <div class="payment-option"><img src="{% static 'img/phonepe.png' %}" alt="PhonePe"> PhonePe</div>
+      <div class="payment-option"><img src="{% static 'img/google pay.jpg' %}" alt="GPay"> Google Pay</div>
+      <div class="payment-option"><img src="{% static 'img/paytm.png' %}" alt="Paytm"> Paytm</div>
     </div>
 
     <div class="card-details" id="card-details">

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="/static/css/admin.css" />
-  <link rel="icon" href="/static/img/Picturea1.png">
+  <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+  <link rel="icon" href="{% static 'img/Picturea1.png' %}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons" defer></script>
   <style>
@@ -44,43 +45,44 @@
       <!-- Dashboard -->
       <section id="dashboard-section" class="admin-section">
         <div class="cards">
-          <div class="card"><h3>Total Orders</h3><p>📦 {{ total_order }}</p></div>
+          <div class="card"><h3>Homepage</h3><p>📰 {{ main|length }}</p></div>
           <div class="card"><h3>Menu Items</h3><p>🍔 {{ all_menu }}</p></div>
+          <div class="card"><h3>Total Orders</h3><p>📦 {{ total_order }}</p></div>
           <div class="card"><h3>Enquiries</h3><p>📅 {{ enquierys|length }}</p></div>
           <div class="card"><h3>Users</h3><p>👥 {{ webusers|length }}</p></div>
         </div>
       </section>
 
       <section id="home-section" class="admin-section">
-    <div class="topbar">
-      <h2>Home page</h2>
-      <button id="add-news-btn" class="btn">Add News</button>
-    </div>
-
-    <!-- Form Toggle -->
-    <div id="add-news-form" style="display: none;">
-      <form method="POST" action="{% url 'add-news' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="image" required><br>
-        <input type="text" name="title" placeholder="Food Title" required><br>
-        <textarea name="desc" placeholder="Description"></textarea><br>
-        <button type="submit">Add</button>
-      </form>
-    </div><br>
-
-    <div class="home-list">
-      {% for item in main %}
-      <div class="menu-item">
-        <img src="{{ item.mainpage_image.url }}" alt="{{ item.mainpage_title }}">
-        <div>
-          <h3>{{ item.mainpage_title }}</h3>
-          <p>{{ item.mainpage_desc|safe }}</p>
+        <div class="topbar">
+          <h2>Home page</h2>
+          <button id="add-news-btn" class="btn">Add News</button>
         </div>
-              <button type="submit" onclick="window.location.href='{% url 'remove-news' item.id %}'" class="btn" style="background-color: red; color: white;">Remove News</button>
-      </div>
-      {% endfor %}
-    </div>
-  </section>
+
+        <!-- Form Toggle -->
+        <div id="add-news-form" style="display: none;">
+          <form method="POST" action="{% url 'add-news' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" required><br>
+            <input type="text" name="title" placeholder="Food Title" required><br>
+            <textarea name="desc" placeholder="Description"></textarea><br>
+            <button type="submit">Add</button>
+          </form>
+        </div><br>
+
+        <div class="home-list">
+          {% for item in main %}
+          <div class="menu-item">
+            <img src="{{ item.mainpage_image.url }}" alt="{{ item.mainpage_title }}">
+            <div>
+              <h3>{{ item.mainpage_title }}</h3>
+              <p>{{ item.mainpage_desc|safe }}</p>
+            </div>
+            <button type="submit" onclick="window.location.href='{% url 'remove-news' item.id %}'" class="btn" style="background-color: red; color: white;">Remove News</button>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
 
       <!-- Menu -->
       <section id="menu-section" class="admin-section">
@@ -93,7 +95,7 @@
         <div id="add-food-form" style="display: none;">
           <form method="POST" action="{% url 'add-food' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="file" name="image" ><br>
+            <input type="file" name="image"><br>
             <input type="text" name="title" placeholder="Food Title" required><br>
             <input type="number" name="price" placeholder="Price" required><br>
             <input type="number" name="oldprice" placeholder="Old Price"><br>
@@ -111,7 +113,7 @@
             {% if item.service_image %}
               <img src="{{ item.service_image.url }}" alt="{{ item.service_title }}">
             {% else %}
-              <img src="\media\food\set-vector.jpg" alt="{{ item.service_title }}">
+              <img src="{% static 'img/set-vector.jpg' %}" alt="{{ item.service_title }}">
             {% endif %}
             <div>
               <h3>{{ item.service_title }}</h3>
@@ -129,19 +131,18 @@
         </div>
       </section>
 
-
       <!-- Orders -->
       <section id="orders-section" class="admin-section">
         <h2>Orders</h2>
         <table>
-          <thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Food</th><th>Price</th><th>Quantity</th><th>Instructions</th><th>Delivery</th><th>Payment</th></tr></thead>
+          <thead><tr><th>Name</th><th>Mobile</th><th>Food</th><th>Address</th><th>Price</th><th>Quantity</th><th>Instructions</th><th>Delivery</th><th>Payment</th></tr></thead>
           <tbody>
             {% for order in orders %}
             <tr>
               <td>{{ order.name }}</td>
-              <td>{{ order.email }}</td>
               <td>{{ order.phone }}</td>
               <td>{{ order.food }}</td>
+              <td>{{ order.address }}</td>
               <td>₹{{ order.Price }}</td>
               <td>{{ order.Quantity }}</td>
               <td>{{ order.Special_Instructions }}</td>
@@ -153,7 +154,7 @@
         </table>
       </section>
 
-      <!-- Enquery -->
+      <!-- Enquiry -->
       <section id="enquiry-section" class="admin-section">
         <h2>Enquiry</h2>
         <table>
@@ -165,7 +166,7 @@
               <td>{{ enquiery.email }}</td>
               <td>{{ enquiery.message }}</td>
               <td>{{ enquiery.time }}</td>
-              <td><button type="submit" onclick="window.location.href='{% url 'del-enq' enquiery.id %}'" style="background-color: rgba(255, 255, 255, 0.1); font-size: 16px; padding: 10px 6px;  width: 100%; border-radius:04px; color: red; word-break: break-word;">Delete</button></td>
+              <td><button type="submit" onclick="window.location.href='{% url 'del-enq' enquiery.id %}'" style="background-color: rgba(255, 255, 255, 0.1); font-size: 16px; padding: 10px 6px; width: 100%; border-radius:4px; color: red;">Delete</button></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -250,25 +251,6 @@
       }
 
       feather.replace();
-    });
-
-    let selectionMode = false;
-
-    document.getElementById("enable-selector").addEventListener("click", () => {
-      selectionMode = true;
-      alert("Selection mode activated. Click on a box.");
-    });
-
-    document.querySelectorAll(".selectable").forEach(div => {
-      div.addEventListener("click", function () {
-        if (selectionMode) {
-          document.querySelectorAll(".selectable").forEach(d => d.classList.remove("selected"));
-          this.classList.add("selected");
-          selectionMode = false; // disable mode after one selection
-          alert("Selected div ID: " + this.id);
-          // You can also use this.id in JS logic here
-        }
-      });
     });
   </script>
 </body>

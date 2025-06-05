@@ -1,5 +1,6 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from decouple import config
 
 from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT, MEDIA_URL
 
@@ -71,13 +72,23 @@ WSGI_APPLICATION = 'food_factory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

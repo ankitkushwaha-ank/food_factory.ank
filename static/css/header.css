@@ -69,7 +69,7 @@
     /* Chatbot styles */
     .chatbot-icon {
       position: fixed;
-      bottom: 30px;
+      bottom: 130px;
       right: 40px;
       z-index: 1001;
       cursor: pointer;
@@ -89,7 +89,7 @@
     .chatbox {
       display: none;
       position: fixed;
-      bottom: 100px;
+      bottom: 200px;
       right: 40px;
       width: 350px;
       max-height: 500px;
@@ -156,4 +156,9 @@
     .bot-message {
       background-color: #eee;
       align-self: flex-start;
+    }
+
+    .typing {
+      font-style: italic;
+      opacity: 0.7;
     }

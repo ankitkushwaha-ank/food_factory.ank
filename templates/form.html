@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,33 +6,28 @@
 	<meta charset="utf-8">
 	<meta name="author" content="mr.h4cker.com">
 	<meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
-	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-thumbs.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-buttons.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/contact.css">
-	<link rel="icon" type="image/png" href="/static/img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fancybox-thumbs.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fancybox-buttons.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fancybox.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 
 <body>
     <section class="billboard light">
-		<!-- Include Header -->
         {% include "header.html" %}
-
-
 		<div class="shadow"></div>
 
         <section class="contact" style="margin-top:0%;">
           <div class="caption light animated wow fadeInDown clearfix" style="margin-top:0%;">
 			<h1>Fill the form</h1>
-<!--			<p>We always value your words.</p>-->
 		<form id="search-form" method="get" action="{% url 'search' %}">
 			<input type="text" placeholder="Search..." name="servicename" value=""/>
 			<button type="submit">Search</button>
-<!--			<button type="submit">Go</button>-->
 		</form>
-<!--form start from here-->
+
 	<section class="contact">
 		<div id="form-main">
 			<div id="form-div">
@@ -53,9 +49,7 @@
 				</form>
 			</div>
 		</div>
-	</section><!-- End contact -->
-
-   <!-- End billboard -->
+	</section>
 
 <footer style="background-color: #1a1a1a;
         color: #f2f2f2;
@@ -85,5 +79,5 @@
     </div>
 </footer>
 
-
 </body>
+</html>

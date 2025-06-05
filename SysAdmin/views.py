@@ -166,6 +166,16 @@ def add_news(request):
     else:
         return redirect('admin_dashboard')
 
+def remove_news(request, item_id):
+    print(f"Attempting to delete news item {item_id}")
+    try:
+        mainpage.objects.get(id=item_id).delete()
+    except mainpage.DoesNotExist:
+        print(f"News item {item_id} does not exist")
+    return redirect('admin_dashboard')
+
+
+
 def admin(request):
     custom_admin=None
     if request.user.is_authenticated:

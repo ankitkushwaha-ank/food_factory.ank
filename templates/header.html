@@ -1,15 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="/static/css/header.css">
+  <style>
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      border-radius: 4px;
+      z-index: 1000;
+    }
 
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
 
 <header class="wrapper light">
-  <a href="/" ><img class="logo" src="\static\img\logo.png" alt="Restaurant Logo"/></a>
+  <a href="/"><img class="logo" src="/static/img/logo.png" alt="Restaurant Logo"/></a>
 
   <nav>
     <ul class="nav-links">
@@ -22,12 +47,12 @@
 
     {% if webuser %}
     <div class="profile-container" id="profileContainer">
-      <div class="profile-pic" id="profilePic">
-          {% if webuser.user_image %}
-            <img src="{{ webuser.user_image.url }}" alt="Profile Picture" />
-          {% else %}
-            <img src="\media\user\default-profile-picture-grey-mal.png" alt="Profile Picture" />
-          {% endif %}
+      <div class="profile-pic" id="profilePic" style="cursor: pointer;">
+        {% if webuser.user_image %}
+          <img src="{{ webuser.user_image.url }}" alt="Profile Picture" />
+        {% else %}
+          <img src="/media/user/default-profile-picture-grey-mal.png" alt="Profile Picture" />
+        {% endif %}
       </div>
       <div class="dropdown-menu" id="dropdownMenu">
         <a href="#" style="font-weight: bold; color: rgb(230,123,0); background-color: #e6f0ff; border-bottom: 1px solid #ccc;">
@@ -52,7 +77,7 @@
 
 <!-- AI Chatbot Icon -->
 <div class="chatbot-icon" id="chatbotIcon">
-  <img src="\static\img\Untitled (1).jpg" alt="Chatbot Icon">
+  <img src="/static/img/Untitled (1).jpg" alt="Chatbot Icon">
 </div>
 
 <!-- Chatbox -->
@@ -68,49 +93,103 @@
 </div>
 
 <script>
-  // Profile dropdown toggle
-  const profilePic = document.getElementById('profilePic');
-  const dropdownMenu = document.getElementById('dropdownMenu');
-  const profileContainer = document.getElementById('profileContainer');
+  document.addEventListener("DOMContentLoaded", () => {
+    const chatbotIcon = document.getElementById('chatbotIcon');
+    const chatbox = document.getElementById('chatbox');
+    const chatboxBody = document.getElementById('chatboxBody');
+    const userInput = document.getElementById('userInput');
 
-  if (profilePic && dropdownMenu && profileContainer) {
-    profilePic.addEventListener('click', () => {
-      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    });
+    if (chatbotIcon) {
+      chatbotIcon.addEventListener('click', () => {
+        chatbox.style.display = chatbox.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
 
-    document.addEventListener('click', function(event) {
-      if (!profileContainer.contains(event.target)) {
-        dropdownMenu.style.display = 'none';
-      }
-    });
-  }
+    if (userInput) {
+      userInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          sendMessage();
+        }
+      });
+    }
 
-  // Chatbot logic
-  const chatbotIcon = document.getElementById('chatbotIcon');
-  const chatbox = document.getElementById('chatbox');
-  const chatboxBody = document.getElementById('chatboxBody');
+    // Profile dropdown toggle logic
+    const profilePic = document.getElementById("profilePic");
+    const dropdownMenu = document.getElementById("dropdownMenu");
 
-  chatbotIcon.addEventListener('click', () => {
-    chatbox.style.display = chatbox.style.display === 'flex' ? 'none' : 'flex';
+    if (profilePic && dropdownMenu) {
+      profilePic.addEventListener("click", () => {
+        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!profilePic.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.style.display = "none";
+        }
+      });
+    }
   });
 
-  function sendMessage() {
-    const input = document.getElementById('userInput');
-    const text = input.value.trim();
-    if (text) {
-      const userMsg = document.createElement('div');
-      userMsg.className = 'message user-message';
-      userMsg.innerText = text;
-      chatboxBody.appendChild(userMsg);
+  async function sendMessage() {
+    const userInput = document.getElementById('userInput');
+    const chatboxBody = document.getElementById('chatboxBody');
+    const text = userInput.value.trim();
+
+    if (!text) return;
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user-message';
+    userMsg.innerText = text;
+    chatboxBody.appendChild(userMsg);
+    userInput.value = '';
+
+    const typing = document.createElement('div');
+    typing.className = 'message bot-message';
+    typing.innerText = 'Typing...';
+    chatboxBody.appendChild(typing);
+    chatboxBody.scrollTop = chatboxBody.scrollHeight;
+
+    try {
+      const res = await fetch('/chatbot/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken(),
+        },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+      typing.remove();
 
       const botMsg = document.createElement('div');
       botMsg.className = 'message bot-message';
-      botMsg.innerText = "I'm just a demo for now! Connect me to Django/OpenAI to reply.";
+      botMsg.innerText = data.reply || 'No response';
       chatboxBody.appendChild(botMsg);
-
-      input.value = '';
       chatboxBody.scrollTop = chatboxBody.scrollHeight;
+    } catch (error) {
+      typing.remove();
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'message bot-message';
+
+      const username = "{{ webuser.username|escapejs }}" || "there";
+      errorMsg.innerText = `Hey ${username}, this feature is still in development. Please try again in a little while.`;
+
+      chatboxBody.appendChild(errorMsg);
     }
+  }
+
+  function getCSRFToken() {
+    const name = 'csrftoken';
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + '=')) {
+        return decodeURIComponent(cookie.substring(name.length + 1));
+      }
+    }
+    return '';
   }
 </script>
 

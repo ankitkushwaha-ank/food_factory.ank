@@ -1,22 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>contact-us page</title>
-	<meta charset="utf-8">
-	<meta name="author" content="mr.h4cker.com">
-	<meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
-	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-thumbs.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox-buttons.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/fancybox.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/contact.css">
-	<link rel="icon" type="image/png" href="/static/img/favicon.png">
+    <title>contact-us page</title>
+    <meta charset="utf-8">
+    <meta name="author" content="mr.h4cker.com">
+    <meta name="description" content="Sublime Stunning free HTML5/CSS3 website template"/>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fancybox-thumbs.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fancybox-buttons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fancybox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 </head>
 <body>
 
 	<section class="billboard light">
-		<!-- Include Header -->
 		{% include "header.html" %}
 
 		<div class="caption light animated wow fadeInDown clearfix">
@@ -25,7 +26,7 @@
 			<hr>
 		</div>
 		<div class="shadow"></div>
-	</section><!-- End billboard -->
+	</section>
 
 	<section class="services wrapper">
 		<ul class="clearfix">
@@ -39,7 +40,7 @@
 				<span class="separator"></span>
 			</li>
 			<li class="animated wow fadeInDown" data-wow-delay=".2s">
-				<img class="icon" src="/static/img/icon2.png" alt=""/>
+                <img class="icon" src="{% static 'img/icon2.png' %}" alt=""/>
 				<span class="separator"></span>
 				<h2>How to reach us:</h2>
 				<p>Phone No. xxxxxxxxxxx</p>
@@ -47,9 +48,9 @@
 				<p>House No. xxx. Road. xxxx. Block. xxx. india.</p>
 			</li>
 		</ul>
-	</section><!-- End service -->
+	</section>
 
-	<!-- Contact Form -->
+
 	<section class="contact">
 		<div id="form-main">
 			<div id="form-div">
@@ -71,7 +72,7 @@
 				</form>
 			</div>
 		</div>
-	</section><!-- End contact -->
+	</section>
 <br>
 <br>
 <br>
@@ -105,22 +106,13 @@
 <br>
 
 	<section class="video">
-		<img class="logo" src="/static/img/logo.png" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
-		<img src="/static/img/video_logo.png" alt="" class="video_logo animated wow fadeInDown"/>
-		<h3 class="animated wow fadeInDown">Please send us your opinions in the form below, thank you!</h3>
-	</section><!-- End video -->
+        <img class="logo" src="{% static 'img/logo.png' %}" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
+        <img src="{% static 'img/video_logo.png' %}" alt="" class="video_logo animated wow fadeInDown"/>
+        <h3 class="animated wow fadeInDown">Please send us your opinions in the form below, thank you!</h3>
+    </section>
 
-	<!-- Include Footer -->
+
 	{% include "footer.html" %}
-	<!-- Scripts -->
-	<script type="text/javascript" src="/static/js/jquery.js"></script>
-	<script type="text/javascript" src="/static/js/fancybox.js"></script>
-	<script type="text/javascript" src="/static/js/fancybox-buttons.js"></script>
-	<script type="text/javascript" src="/static/js/fancybox-media.js"></script>
-	<script type="text/javascript" src="/static/js/fancybox-thumbs.js"></script>
-	<script type="text/javascript" src="/static/js/wow.js"></script>
-	<script type="text/javascript" src="/static/js/main.js"></script>
-
 
 </body>
 </html>

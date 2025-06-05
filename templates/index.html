@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-	{% block title %}welcome to Food factory{% endblock %}
+{% load static %}
+{% block title %}welcome to Food factory{% endblock %}
 
-
-{% block content%}
+{% block content %}
 	<section class="billboard light">
 		<!-- Include Header -->
 		{% include "header.html" %}
@@ -14,7 +14,6 @@
 		</div>
 		<div class="shadow"></div>
 	</section><!-- End billboard -->
-
 
 	<section class="services wrapper">
 		<ul class="clearfix">
@@ -29,9 +28,8 @@
 		</ul>
 	</section><!-- End service -->
 
-
 	<section class="video">
-		<img class="logo" src="/static/img/logo.png" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
+		<img class="logo" src="{% static 'img/logo.png' %}" alt="Restaurant welcomes you" class="video_logo animated wow fadeInDown"/>
 		<h3 class="animated wow fadeInDown">The icing on the cake is our prompt, efficient and personalized service.</h3>
 		<a href="#" id="play_btn" class="fancybox animated wow flipInX" data-wow-duration="2s"></a>
 	</section><!-- End video -->
@@ -46,15 +44,6 @@
 
 	<!-- Include Footer -->
 	{% include "footer.html" %}
-
-	<!-- JavaScript Files -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="/static/js/jquery.js"></script>
-	<script type="text/javascript" src="/static/js/fancybox.js"></script>
-	<script type="text/javascript" src="/static/js/wow.js"></script>
-	<script type="text/javascript" src="/static/js/main.js"></script>
 
 	<!-- Include HTML script -->
 {% endblock %}

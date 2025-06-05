@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,10 @@
     <meta name="description" content="Cart Page - View and manage your items">
 
     <!-- External Styles -->
-    <link rel="stylesheet" href="/static/css/reset.css">
-    <link rel="stylesheet" href="/static/css/animate.css">
-    <link rel="stylesheet" href="/static/css/menu.css">
-    <link rel="icon" type="image/png" href="/static/img/favicon.png">
-
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
     <!-- Custom Styling -->
     <style>
         body {

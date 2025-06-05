@@ -13,5 +13,6 @@ urlpatterns = [
     path('addnews/', add_news, name='add-news'),
     path('del_enq/<int:enqid>', del_enquiry, name='del-enq'),
     path('remove/<int:item_id>', remove_item, name='remove-food'),
+    path('remove-news/<int:item_id>/', remove_news, name='remove-news'),
 
 ]

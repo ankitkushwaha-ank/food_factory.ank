@@ -9,6 +9,19 @@ from django.utils import timezone
 from functools import wraps
 from django.core.exceptions import ValidationError
 
+import openai
+
+import google.generativeai as genai
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import os
+
+# Set your Gemini API key
+genai.configure(api_key="AIzaSyA6riqyt_eGQy5ky9iKPpgGoKtMxnNdsq4")
+
+model = genai.GenerativeModel("gemini-pro")
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -271,10 +284,42 @@ def order_deatil(request):
 def food_added_to_cart(request):
     return render(request,'food_added_to_cart.html')
 
-def remove_news(request, item_id):
-    print(f"Attempting to delete news item {item_id}")
-    try:
-        mainpage.objects.get(id=item_id).delete()
-    except mainpage.DoesNotExist:
-        print(f"News item {item_id} does not exist")
-    return redirect('admin_dashboard')
+
+
+
+# @csrf_exempt
+# def chatbot(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         user_message = data.get('message')
+#
+#         response = openai.ChatCompletion.create(
+#             model="gpt-4",
+#             messages=[
+#                 {"role": "system", "content": "You are a helpful assistant."},
+#                 {"role": "user", "content": user_message}
+#             ]
+#         )
+#
+#         reply = response.choices[0].message['content']
+#         return JsonResponse({'reply': reply})
+
+
+@csrf_exempt
+def chatbot_response(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            user_msg = data.get('message', '')
+
+            # Get Gemini response
+            response = model.generate_content(user_msg)
+            reply = response.text
+
+            return JsonResponse({'reply': reply})
+        except Exception as e:
+            return JsonResponse({'reply': f'Error: {str(e)}'}, status=500)
+
+    return JsonResponse({'reply': 'Invalid request method.'}, status=405)
+
+
