@@ -1,6 +1,5 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
-from decouple import config
 
 from django.conf.global_settings import STATICFILES_DIRS, MEDIA_ROOT, MEDIA_URL
 

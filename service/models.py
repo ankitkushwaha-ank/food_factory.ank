@@ -1,7 +1,8 @@
 from django.utils import timezone
 from django.db import models
 from tinymce.models import HTMLField
-from autoslug import AutoSlugField
+from autoslug.fields import AutoSlugField
+
 from decimal import Decimal, ROUND_HALF_UP
 from SysAdmin.models import WebUsers
 
